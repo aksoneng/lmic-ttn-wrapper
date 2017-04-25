@@ -1,0 +1,32 @@
+#######################################
+# Syntax Coloring Map For Motor
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+radio	           KEYWORD1
+_pin_rfm96_nss     KEYWORD1
+_pin_rfm96_io0     KEYWORD1
+_pin_rfm96_io1     KEYWORD1
+event_callback     KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init             KEYWORD2
+send_data        KEYWORD2
+set_event_cb     KEYWORD2
+onEvent          KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+
+private:
+
+};
