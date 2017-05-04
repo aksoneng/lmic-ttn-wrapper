@@ -13,15 +13,15 @@ void onEvent (ev_t ev);
 
 class radio{
 public:
-    radio(uint8_t pin_rfm96_nss, uint8_t pin_rfm96_io0, uint8_t pin_rfm96_io1);
+    radio(unsigned char pin_rfm96_nss, unsigned char pin_rfm96_io0, unsigned char pin_rfm96_io1);
     void init();
 
-    void send_data(uint8_t mydata[], int size);
+    void send_data(unsigned char mydata[], int size);
     void set_event_cb(event_cb_t callback);
 
-    int _pin_rfm96_nss =LMIC_UNUSED_PIN;
-    int _pin_rfm96_io0 =LMIC_UNUSED_PIN;
-    int _pin_rfm96_io1 =LMIC_UNUSED_PIN;
+    unsigned char _pin_rfm96_nss =LMIC_UNUSED_PIN;
+    unsigned char _pin_rfm96_io0 =LMIC_UNUSED_PIN;
+    unsigned char _pin_rfm96_io1 =LMIC_UNUSED_PIN;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include <lmic-ttn-wrapper.h>
 
-radio::radio(uint8_t pin_rfm96_nss, uint8_t pin_rfm96_io0, uint8_t pin_rfm96_io1){
+radio::radio(unsigned char pin_rfm96_nss, unsigned char pin_rfm96_io0, unsigned char pin_rfm96_io1){
     _pin_rfm96_nss =pin_rfm96_nss;
     _pin_rfm96_io0 =pin_rfm96_io0;
     _pin_rfm96_io1 =pin_rfm96_io1;
@@ -109,7 +109,7 @@ void onEvent (ev_t ev) {
     event_callback((void *)ev);
 }
 
-void radio::send_data(uint8_t mydata[], int size){
+void radio::send_data(unsigned char mydata[], int size){
     // Check if there is not a current TX/RX job running
     if (LMIC.opmode & OP_TXRXPEND) {
         Serial.println(F("OP_TXRXPEND, not sending"));
