@@ -16,7 +16,7 @@ public:
     radio(unsigned char pin_rfm96_nss, unsigned char pin_rfm96_io0, unsigned char pin_rfm96_io1);
     void init();
 
-    void send_data(unsigned char mydata[], int size);
+    void send_data(unsigned char mydata[], unsigned char size);
     void set_event_cb(event_cb_t callback);
 
     unsigned char _pin_rfm96_nss =LMIC_UNUSED_PIN;
