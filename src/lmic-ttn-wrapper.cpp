@@ -1,9 +1,15 @@
 #include <lmic-ttn-wrapper.h>
 
-radio::radio(unsigned char pin_rfm96_nss, unsigned char pin_rfm96_io0, unsigned char pin_rfm96_io1){
-    _pin_rfm96_nss =pin_rfm96_nss;
-    _pin_rfm96_io0 =pin_rfm96_io0;
-    _pin_rfm96_io1 =pin_rfm96_io1;
+const lmic_pinmap lmic_pins;
+
+radio::radio(unsigned char pin_rfm96_nss, unsigned char pin_rfm96_rst, unsigned char pin_rfm96_rxtx, unsigned char pin_rfm96_io0, unsigned char pin_rfm96_io1, unsigned char pin_rfm96_io2){
+
+  lmic_pins = {
+    .nss = pin_rfm96_nss,
+    .rxtx = pin_rfm96_rxtx,
+    .rst = pin_rfm96_rst,
+    .dio = {pin_rfm96_io0, pin_rfm96_io1, pin_rfm96_io2},
+  };
 }
 
 void radio::init(){
@@ -35,15 +41,14 @@ void radio::init(){
     // frequency and support for class B is spotty and untested, so this
     // frequency is not configured here.
 
-    // Disable link check validation
-    LMIC_setLinkCheckMode(0);
-
     // TTN uses SF9 for its RX2 window.
     LMIC.dn2Dr = DR_SF9;
 
     // Set data rate and transmit power for uplink (note: txpow seems to be ignored by the library)
     // Use DR_SF12 for maximal range, DR_SF7 for maximal bandwidth
     LMIC_setDrTxpow(DR_SF7,14);
+
+    LMIC_setAdrMode(1);
 }
 
 void onEvent (ev_t ev) {
@@ -119,6 +124,14 @@ void radio::send_data(unsigned char mydata[], unsigned char size){
         LMIC_setTxData2(1, mydata, size, 0);
         Serial.println(F("Packet queued"));
     }
+}
+
+void radio::start_joining(){
+  LMIC_startJoining();
+}
+
+void radio::ev_joined(){
+  LMIC_setLinkCheckMode(0);
 }
 
 void radio::set_event_cb(event_cb_t callback){
